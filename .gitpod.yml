@@ -19,7 +19,6 @@ tasks:
     command: |
       gp sync-await tomcat-ready
       mvn tomcat7:deploy
-      gp sync-done mvn-build
 
 ports:
   - port: 8080
