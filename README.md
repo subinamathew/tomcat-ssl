@@ -1,2 +1,3 @@
-# tomcat-ssl
-This is used to tomcat on gitpod
+# Simple Java App
+
+This is a simple Java application with tomcat

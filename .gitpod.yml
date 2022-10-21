@@ -1,0 +1,46 @@
+tasks:
+  - name: tomcat-ready
+    init: |
+      wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.zip
+      unzip apache-tomcat-9.0.68.zip
+      rm apache-tomcat-9.0.68.zip
+    command: |
+      chmod +x apache-tomcat-9.0.68/bin/*.sh
+      cp settings/tomcat-users.xml apache-tomcat-9.0.68/conf
+      cp settings/server.xml apache-tomcat-9.0.68/conf
+      cp settings/keystore.jks apache-tomcat-9.0.68/conf
+      cp settings/setenv.sh apache-tomcat-9.0.68/bin
+      sudo cp settings/settings.xml /home/gitpod/.m2/settings.xml
+      sh apache-tomcat-9.0.68/bin/catalina.sh jpda start
+      gp sync-done tomcat-ready
+
+  - name: mvn-build
+    init: mvn clean install -DskipTests
+    command: |
+      gp sync-await tomcat-ready
+      mvn tomcat7:deploy
+      gp sync-done mvn-build
+
+ports:
+  - port: 8080
+    onOpen: ignore
+    visibility: public
+
+  - port: 8005
+    onOpen: ignore
+
+  - port: 14141
+    onOpen: ignore
+    visibility: public
+
+vscode:
+  extensions:
+    - redhat.java
+    - redhat.fabric8-analytics
+    - mhutchie.git-graph
+    - anweber.vscode-httpyac
+    - rangav.vscode-thunder-client
+    - cweijan.vscode-postgresql-client2
+    - vscjava.vscode-java-pack
+    - Pivotal.vscode-boot-dev-pack
+

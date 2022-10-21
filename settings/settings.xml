@@ -1,0 +1,11 @@
+<settings>
+  <localRepository>/workspace/m2-repository/</localRepository>
+    <!-- Configure the Tomcat Maven plugin user -->
+    <servers>
+        <server>
+            <id>TomcatServer</id>
+            <username>admin</username>
+            <password>password</password>
+        </server>
+    </servers>
+</settings>
