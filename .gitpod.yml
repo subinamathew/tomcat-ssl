@@ -7,7 +7,7 @@ tasks:
     command: |
       chmod +x apache-tomcat-9.0.68/bin/*.sh
       cp settings/tomcat-users.xml apache-tomcat-9.0.68/conf
-      cp settings/server.xml apache-tomcat-9.0.68/conf
+      cp settings/server_https.xml apache-tomcat-9.0.68/conf/server.xml
       cp settings/keystore.jks apache-tomcat-9.0.68/conf
       cp settings/setenv.sh apache-tomcat-9.0.68/bin
       sudo cp settings/settings.xml /home/gitpod/.m2/settings.xml
